@@ -26,19 +26,25 @@ do
 done
 
 # Determine the IBM Cloud Private embedded Docker image name
-if [ "$${iver[0]}" -ge "2" ] && [ "$${iver[1]}" -ge "1" ] &&
-    [ "$${iver[2]}" -ge "0" ] && [ "$${iver[3]}" -ge "3" ]; then
-    # ICP 2.1.0.3 or later
-    ICP_DOCKER_IMAGE="ibmcom/icp-inception:${icp_version}"
-elif [ "${icp_architecture}" == "ppc64le" ]; then
-    # ICP 2.1.0.2 or earlier ppc64le
-    ICP_DOCKER_IMAGE="ibmcom/icp-inception-ppc64le:${icp_version}"
-else
-    # ICP 2.1.0.2 or earlier x86
-    ICP_DOCKER_IMAGE="ibmcom/icp_inception:${icp_version}"
+ARCH_POSTFIX=""
+ICP_DOCKER_IMAGE="ibmcom/icp-inception"
+# Before 2.1.0.2 append ppc64le for IBM Power
+if [ "$${iver[0]}" -le "2" ] && [ "$${iver[1]}" -le "1" ] &&
+    [ "$${iver[2]}" -le "0" ] && [ "$${iver[3]}" -le "2" ]; then
+    # ICP 2.1.0.2 or earlier
+    if [ "${icp_architecture}" == "ppc64le" ]; then
+        ARCH_POSTFIX="-ppc64le"
+    fi
 fi
+
+# Incase of EE after 3.x release ARCH is needed for all types
 if [ "${icp_edition}" == "ee" ]; then
-    ICP_DOCKER_IMAGE="$ICP_DOCKER_IMAGE-ee"
+    if [ "$${iver[0]}" -ge "3" ]; then
+        ARCH_POSTFIX="-"${icp_architecture}
+    fi
+    ICP_DOCKER_IMAGE="$ICP_DOCKER_IMAGE$ARCH_POSTFIX:${icp_version}-ee"
+else
+    ICP_DOCKER_IMAGE="$ICP_DOCKER_IMAGE$ARCH_POSTFIX:${icp_version}"
 fi
 
 # Root directory of ICP installation
