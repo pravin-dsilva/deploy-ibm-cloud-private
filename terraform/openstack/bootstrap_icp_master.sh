@@ -60,7 +60,7 @@ if [ -f /etc/redhat-release ]; then
     systemctl disable firewalld
     # Make sure we're not running some old version of docker
     yum -y remove docker docker-engine docker.io
-    yum -y install socat 
+    yum -y install socat docker 
     # Either install the icp docker version or from the repo
     if [ ${docker_download_location} != "" ]; then
         TMP_DIR="$(/bin/mktemp -d)"
@@ -128,7 +128,14 @@ fi
 
 # Ensure the hostnames are resolvable
 IP=`/sbin/ip -4 -o addr show dev eth0 | awk '{split($4,a,"/");print a[1]}'`
+if [ "$IP" == "" ]; then
+    IP=`/sbin/ip -4 -o addr show dev  enp0s1  | awk '{split($4,a,"/");print a[1]}'`
+fi
+
+
+
 /bin/echo "$IP $(hostname)" >> /etc/hosts
+/bin/sed -i.bak -e "8d" /etc/hosts
 
 # Download and configure IBM Cloud Private
 if [ "${icp_edition}" == "ee" ]; then

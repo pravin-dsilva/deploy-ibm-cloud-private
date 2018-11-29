@@ -115,3 +115,14 @@ variable "docker_download_location" {
     description = "HTTP wget location for ICP provided Docker package"
     default = ""
 }
+
+variable "openstack_floating_network_name" {
+    default = "admin_floating_net"
+}
+variable "openstack_availability_zone" {
+    default = "power"
+}
+variable "openstack_security_groups" {
+    default = ["default", "default_sg", "public_sg", "worker_sg", "glusterfs-sg"]
+}
+
