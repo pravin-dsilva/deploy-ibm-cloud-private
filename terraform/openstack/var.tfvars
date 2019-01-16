@@ -1,5 +1,5 @@
-openstack_user_name = "pravind@us.ibm.com"
-openstack_password = "Rockdanew54."
+openstack_user_name = "abc"
+openstack_password = "abc"
 openstack_project_name = "BlueRidgeGroup-P"
 openstack_domain_name = "ibm"
 openstack_auth_url = "https://hdc-prod-cloud.hursley.ibm.com:5000/v3"
