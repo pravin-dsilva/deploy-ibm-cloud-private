@@ -105,6 +105,8 @@ data "template_file" "bootstrap_init" {
         cam_download_location = "${var.cam_download_location}"
         cam_download_user = "${var.cam_download_user}"
         cam_download_password = "${var.cam_download_password}"
+        ftp_repo_username = "${var.ftp_repo_username}"
+        ftp_repo_password = "${var.ftp_repo_password}"
     }
 }
 
@@ -113,6 +115,8 @@ data "template_file" "bootstrap_worker" {
 
     vars {
         docker_download_location = "${var.docker_download_location}"
+        ftp_repo_username = "${var.ftp_repo_username}"
+        ftp_repo_password = "${var.ftp_repo_password}"
     }
 }
 

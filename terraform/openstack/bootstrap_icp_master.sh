@@ -55,18 +55,18 @@ ICP_ROOT_DIR="/opt/ibm-cloud-private-${icp_edition}"
 # Now for distro dependent stuff
 if [ -f /etc/redhat-release ]; then
 #RHEL specific steps
-sudo cat >> /etc/yum.repos.d/ftp.repo <<EOL
+    sudo cat >> /etc/yum.repos.d/ftp.repo <<EOL
 [ftp3]
 name=FTP3 yum repository
-baseurl=ftp://username:<password>@ftp3.linux.ibm.com/redhat/release_cds/RHEL-7.5-GA/Server/ppc64le/os/
+baseurl=ftp://${ftp_repo_username}:${ftp_repo_password}@ftp3.linux.ibm.com/redhat/release_cds/RHEL-7.5-GA/Server/ppc64le/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 [ftp3-supp]
 name=FTP3 sup yum repository
-baseurl=ftp://username:<password>@ftp3.linux.ibm.com/redhat/release_cds/RHEL-Supplementary-7.5-GA/Server/ppc64le/os/
+baseurl=ftp://${ftp_repo_username}:${ftp_repo_password}@ftp3.linux.ibm.com/redhat/release_cds/RHEL-Supplementary-7.5-GA/Server/ppc64le/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 [ftp3-altopt]
 name=FTP3 alt optional yum repository
-baseurl=ftp://username:<password>@ftp3.linux.ibm.com/redhat/release_cds/RHEL-ALT-7.5-GA/Server-optional/ppc64le/os/
+baseurl=ftp://${ftp_repo_username}:${ftp_repo_password}@ftp3.linux.ibm.com/redhat/release_cds/RHEL-ALT-7.5-GA/Server-optional/ppc64le/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 EOL
 
@@ -82,8 +82,7 @@ EOL
         cd "$TMP_DIR"
         /usr/bin/wget -q "${docker_download_location}"
         chmod +x *
-        #./*.bin --install
-        yum -y install *.rpm
+        ./*.bin --install
         /bin/rm -rf "$TMP_DIR"
     else
         yum -y install docker-ce

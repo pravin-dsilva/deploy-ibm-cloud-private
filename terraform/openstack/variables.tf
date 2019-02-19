@@ -178,3 +178,11 @@ variable "cam_download_user" {
 variable "cam_download_password" {
     default = ""
 }
+
+variable "ftp_repo_username" {
+    default = ""
+}
+
+variable "ftp_repo_password" {
+    default = ""
+}
