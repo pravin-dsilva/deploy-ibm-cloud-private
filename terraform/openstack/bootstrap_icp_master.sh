@@ -58,15 +58,15 @@ if [ -f /etc/redhat-release ]; then
 sudo cat >> /etc/yum.repos.d/ftp.repo <<EOL
 [ftp3]
 name=FTP3 yum repository
-baseurl=ftp://pravind%40us.ibm.com:FtpPass123@ftp3.linux.ibm.com/redhat/release_cds/RHEL-7.5-GA/Server/ppc64le/os/
+baseurl=ftp://username:<password>@ftp3.linux.ibm.com/redhat/release_cds/RHEL-7.5-GA/Server/ppc64le/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 [ftp3-supp]
 name=FTP3 sup yum repository
-baseurl=ftp://pravind%40us.ibm.com:FtpPass123@ftp3.linux.ibm.com/redhat/release_cds/RHEL-Supplementary-7.5-GA/Server/ppc64le/os/
+baseurl=ftp://username:<password>@ftp3.linux.ibm.com/redhat/release_cds/RHEL-Supplementary-7.5-GA/Server/ppc64le/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 [ftp3-altopt]
 name=FTP3 alt optional yum repository
-baseurl=ftp://pravind%40us.ibm.com:FtpPass123@ftp3.linux.ibm.com/redhat/release_cds/RHEL-ALT-7.5-GA/Server-optional/ppc64le/os/
+baseurl=ftp://username:<password>@ftp3.linux.ibm.com/redhat/release_cds/RHEL-ALT-7.5-GA/Server-optional/ppc64le/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 EOL
 
